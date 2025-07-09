@@ -22,7 +22,7 @@ while True:
     RGBimg = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # change torgb for processing as mediapipe trained andwork on rgb image
     results = hands.process(RGBimg) # this will process and locate landmarks in rgb image and return them
     # print(results.multi_hand_landmarks) # multi_hand_landmarks return coordinates for hand landmarks
-        #     landmark {
+        # landmark {
         # x: 0.280216753
         # y: 0.456834435
         # z: -0.100757822
@@ -34,6 +34,27 @@ while True:
 
     if results.multi_hand_landmarks:
         for handsLdm in results.multi_hand_landmarks: # for each landmarks in array
+            for id, ldm in enumerate(handsLdm.landmark): # give all landmarks with id 
+                # print(id,ldm)
+                # 0 x: 0.586640477
+                # y: 0.941954136
+                # z: 7.62740683e-007
+
+                # 1 x: 0.667436779
+                # y: 0.873289704
+                # z: -0.0277191736
+
+                h, w, c = img.shape
+                cx , cy = int(w*ldm.x), int(h*ldm.y) # We get landmark coordinates as normalized decimals (0–1), so we multiply by image width/height to convert them to actual pixel positions on the image.
+                # print(id, cx, cy) # print accurate location co-ordinate of each landmark on framewith its id
+                # 0 348 478
+                # 1 438 447
+                # 2 511 391
+                # 3 551 333
+
+                if id in [0,4,8,12,16,20]:
+                    cv2.circle(img, (cx,cy), 15, (255,0,255), cv2.FILLED)
+                # cv2.circle(img, (cx,cy), 7, (255,0,255), 10, -1)
             mpDraw.draw_landmarks(img, handsLdm, mpHands.HAND_CONNECTIONS) # HAND_CONNECTION drwal line between points while without it its just a points at landmarks
 
 # fps calculation as if 1frame in 1sec it 1/1 hence 1 1 frame in 0.02 second is1/0.02 i.e 50fps
