@@ -32,7 +32,7 @@ while True:
         # y: 0.377739191
         # z: -0.111736827  -- An array of landmarks
 
-    if results.multi_hand_landmarks:
+    if results.multi_hand_landmarks: # bcz of this we dont face error even if no hands detected
         for handsLdm in results.multi_hand_landmarks: # for each landmarks in array
             for id, ldm in enumerate(handsLdm.landmark): # give all landmarks with id 
                 # print(id,ldm)
