@@ -57,14 +57,14 @@ def main():
         if len(ldmList) != 0: # so that notthrough error even if list empty i.e. no hand detected
             print(ldmList[4]) # return id 4ths cx and cy i.e. we successfully track thumb tip
             
-            # cv2.circle(img, (ldmList[8][1],ldmList[8][2]), 15, (255,0,255), cv2.FILLED)
+            cv2.circle(img, (ldmList[8][1],ldmList[8][2]), 15, (255,0,255), cv2.FILLED)
 
 
         cTime = time.time()
         fps = 1/(cTime-pTime)
         pTime =cTime
 
-        cv2.putText(img, str(int(fps)), (10,70),cv2.FONT_HERSHEY_PLAIN,3,(255,0,255),3)
+        # cv2.putText(img, str(int(fps)), (10,70),cv2.FONT_HERSHEY_PLAIN,3,(255,0,255),3)
         
         cv2.imshow('frame', img)
 
