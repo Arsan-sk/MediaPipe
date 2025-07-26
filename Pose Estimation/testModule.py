@@ -13,7 +13,9 @@ while True:
     ret, img = cap.read()
     img = detector.findPose(img, draw=True)
     ldmList = detector.getPosition(img)
-    print(ldmList[0])
+    if len(ldmList) > 0:
+        print(ldmList[0])
+        cv2.circle(img, (ldmList[0][1],ldmList[0][2]),5,(255,255,0), cv2.FILLED)
     cTime = time.time()
     fps = 1/(cTime-pTime)
     pTime = cTime 
